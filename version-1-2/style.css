@@ -1,0 +1,293 @@
+/*
+ * Name: Virtual Hang
+ * Description: A Web Audio experiment by Middle Ear Media.
+ * Author: Obadiah Metivier
+ * Version: 1.2
+*/
+
+/* Typography */
+@font-face {
+    font-family: 'FFFTusjBold';
+    src: url('assets/fonts/FFF_Tusj-webfont.eot');
+    src: url('assets/fonts/FFF_Tusj-webfont.eot?#iefix') format('embedded-opentype'),
+         url('assets/fonts/FFF_Tusj-webfont.woff') format('woff'),
+         url('assets/fonts/FFF_Tusj-webfont.ttf') format('truetype'),
+         url('assets/fonts/FFF_Tusj-webfont.svg#FFFTusjBold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+h1 {
+    color: #cc9;
+    font-family: 'FFFTusjBold',Arial,sans-serif;
+    font-size: 3.5rem;
+    line-height: 0.5;
+	margin: 20px auto 40px;
+	text-align: center;
+	text-transform: uppercase;
+	width: 570px;
+}
+h2 {
+	color: #cc9;
+}
+#controls h2 {
+	text-align: center;
+}
+h3 {
+	color: #aaa;
+}
+a {
+	color: #cc9;
+	text-decoration: none;
+}
+a:hover {
+	color: #f66;
+	text-decoration:none;
+}
+.small-text {
+	font-size:.8rem;
+}
+.red {
+    color: #f66;
+}
+.green {
+    color: #6ACC28;
+}
+.beige {
+    color: #cc9;
+}
+.active {
+    color: #cc9;
+}
+#credits {
+	text-align: center;
+	width: 100%;
+}
+
+/* Layout */
+* {
+    box-sizing: border-box;   /* Everything else */
+}
+html {
+	overflow-y: scroll; /* force scrollbar to eliminate horizontal jump */
+}
+body {
+	background-color: #111;
+	background-image: url('assets/images/background.jpg');
+	color: #bbb;
+	/* Helvetica/Arial-based sans serif stack */
+	font-family: Geneva, "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 16px;
+}
+#page-wrap {
+	margin: 50px auto;
+	width: 600px;
+}
+
+/* Hang */
+#hang {
+    margin-bottom: 30px;
+}
+.dome {
+	background-color: #777;
+	background-image: url('assets/images/dome.png');
+	border-color: #cc9;
+	border-radius: 50%;
+	border-style: solid;
+	border-width: 4px;
+	box-shadow: 0 0 26px #000;	
+	height: 600px;
+	padding: 0;
+	position: relative;	
+    width: 600px;
+}
+.pad {
+	background-image: url('assets/images/pad.png');
+    background-position: center bottom;
+   -webkit-border-radius: 63px 63px 63px 63px / 64px 64px 96px 96px;
+    border-radius: 50%;
+	cursor: pointer;
+    display:block;
+    height: 146px;
+    width: 126px;
+	opacity: 0.8;
+}
+.pad:hover {
+	margin-top: 1px;
+	opacity: 1;
+}
+
+#pad1 {
+    left: 39.5%;
+    position: absolute;
+    top: 5%;	
+}
+#pad2 {
+    left: 61.5%;
+    position: absolute;
+    top: 15%;	
+	-moz-transform: rotate(45deg);
+	-webkit-transform: rotate(45deg);
+	transform: rotate(45deg);	
+}
+#pad3 {
+    left: 17%;
+    position: absolute;
+    top: 15%;	
+	-moz-transform: rotate(315deg);
+	-webkit-transform: rotate(315deg);
+	transform: rotate(315deg);
+}
+#pad4 {
+    left: 70%;
+    position: absolute;
+    top: 37%;	
+	-moz-transform: rotate(90deg);
+	-webkit-transform: rotate(90deg);
+	transform: rotate(90deg);
+}
+#pad5 {
+    left: 8%;
+    position: absolute;
+    top: 37%;	
+	-moz-transform: rotate(270deg);
+	-webkit-transform: rotate(270deg);
+	transform: rotate(270deg);	
+}
+#pad6 {
+    left: 61.5%;
+    position: absolute;
+    top: 60%;	
+	-moz-transform: rotate(135deg);
+	-webkit-transform: rotate(135deg);
+	transform: rotate(135deg);	
+}
+#pad7 {
+    left: 17%;
+    position: absolute;
+    top: 60%;	
+	-moz-transform: rotate(225deg);
+	-webkit-transform: rotate(225deg);
+	transform: rotate(225deg);		
+}
+#pad8 {
+    left: 39.5%;
+    position: absolute;
+    top: 70%;	
+	-moz-transform: rotate(180deg);
+	-webkit-transform: rotate(180deg);
+	transform: rotate(180deg);		
+}
+#pad9 {
+	background-color: #ccc;
+	background-image: url('assets/images/ding.png')!important;
+	border-radius: 50%;	
+    height: 126px;
+    left: 39.25%;
+	opacity: 0.7;
+    position: absolute;
+    top: 39%;
+    width: 126px;
+}
+#pad9:hover {
+	opacity: 0.9;
+}
+
+/* Options Menu */
+#OptionsNav	{
+	margin-top: 8px;
+}
+#OptionsNav li { 
+	display: inline;
+}
+#OptionsNav li a {
+    border: 1px solid #222;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px #000;
+    display: inline-block;
+    padding: 16px 0;
+    text-align: center;
+    width: 30%;
+}
+#OptionsNav li a:hover {
+    border: 1px solid #cc9;
+}
+#OptionsNav li input {
+	background: transparent;
+    border: 1px solid #222;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px #000;
+	color: #cc9;
+	cursor: pointer;
+    display: inline-block;
+    padding: 16px 0;
+    text-align: center;
+    width: 30%;
+}
+#OptionsNav li input:hover {
+	color: #f66;
+}
+#OptionsNav li input:active {
+    border: 1px solid #cc9;
+	color: #f66;
+}
+
+/* Control Panel */
+.panel {
+    border: 1px solid #222;
+    border-radius: 8px;
+	box-shadow: 0 2px 18px #000;
+    color: #888;
+	margin: 8px 0;
+    padding: 2px 16px;
+}
+.panel strong {
+	color: #ddd;
+}
+
+/* Control Inputs */
+input[type="range"] {
+   -webkit-appearance: none;
+    background-color: #cc9;
+    border: 9px solid #0f0f0f;
+    border-radius: 15px 15px 15px 15px;
+    box-shadow: 0 1px 5px #444;
+    height: 20px;
+    margin: 0 12px 10px;
+    padding: 0 3px;
+    width: 250px;
+}
+input[type='range']::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	background-color: #444;
+	width: 16px;
+	height: 16px;
+	border-radius: 16px;
+	border: 2px solid #cc9;
+	vertical-align: middle;
+}
+.label {
+	display: inline-block;
+}
+.label span {
+    color: #888;
+    display: block;
+	margin-bottom: 5px;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: top;
+}
+input[type="checkbox"] {
+	display:none;
+}
+input[type="checkbox"] + label span {
+	background: url('assets/images/check_radio_sheet.png') left top no-repeat;
+	cursor: pointer;
+	display: inline-block;
+	height: 19px;
+	margin: -1px 4px 0 0;
+	vertical-align: middle;
+	width: 19px;
+}
+input[type="checkbox"]:checked + label span {
+	background: url('assets/images/check_radio_sheet.png') -19px top no-repeat;
+}
