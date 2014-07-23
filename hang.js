@@ -3,7 +3,7 @@
  * Author: Obadiah Metivier
  * Author URI: http://middleearmedia.com/
  * Description: Virtual Instrument based on Hang.
- * Version: 1.0
+ * Version: 1.2
  */
 
 // Create variables for D Hijaz kar Hang and assign audio files to them  
@@ -17,13 +17,21 @@ var pad6 = new audioAlternatingKey("pad6","assets/sounds/hang/d_hang_fsharp4.wav
 var pad7 = new audioAlternatingKey("pad7","assets/sounds/hang/c_hang_eflat4.wav");
 var pad8 = new audioAlternatingKey("pad8","assets/sounds/hang/b_hang_d4.wav");
 var pad9 = new audioAlternatingKey("pad9","assets/sounds/hang/a_hang_a3.wav");
+
+var context; // Create Smart Audio Container
+if (typeof AudioContext !== "undefined") {
+    context = new AudioContext();
+} else if (typeof webkitAudioContext !== "undefined") {
+    context = new webkitAudioContext();
+} else {
+    throw new Error('AudioContext not supported. :(');
+}
   
-var context = new webkitAudioContext(); // Create Audio Container	
-    sourceGainNode = context.createGainNode(); // Create source gain control
+    sourceGainNode = context.createGain(); // Create source gain control. Renamed createGain from createGainNode
     lowPassFilter = context.createBiquadFilter(); // Create low pass filter
     highPassFilter = context.createBiquadFilter(); // Create high pass filter
 	compressorPost = context.createDynamicsCompressor(); // Create post filter compressor
-    masterGainNode = context.createGainNode(); // Create master gain control
+    masterGainNode = context.createGain(); // Create master gain control. Renamed createGain from createGainNode
 	pannerNode = context.createPanner(); // Create panner
 	 
  function audioAlternatingKey(domNode,fileDirectory) {
@@ -37,7 +45,7 @@ var context = new webkitAudioContext(); // Create Audio Container
        var source = context.createBufferSource();
        source.buffer = savedBuffer;
        source.connect(sourceGainNode);
-       source.noteOn(0); // Play sound immediately
+       source.start(0); // Play sound immediately. Renamed source.start from source.noteOn
        };
     var xhr = new XMLHttpRequest();
     xhr.open('get',fileDirectory, true);
@@ -61,7 +69,7 @@ sourceGainNode.connect(lowPassFilter);
 sourceGainNode.connect(highPassFilter);
  	
 // lowPassFilter settings
-lowPassFilter.type = 0; // (Low-pass)
+lowPassFilter.type = "lowpass"; // (Low-pass) Value renamed "lowpass" from 0
 lowPassFilter.frequency.value = 110; // Cut off frequencies above 110 Hz
 document.getElementById('filter-1').addEventListener('change', function() {
     lowPassFilter.frequency.value = this.value;
@@ -73,7 +81,7 @@ document.getElementById('quality-1').addEventListener('change', function() {
 lowPassFilter.connect(compressorPost);
 
 // highPassFilter settings
-highPassFilter.type = 1; // (High-pass)
+highPassFilter.type = "highpass"; // (High-pass) Value renamed "highpass" from 1
 highPassFilter.frequency.value = 880; // Cut off frequencies below 880 Hz
 document.getElementById('filter-2').addEventListener('change', function() {
     highPassFilter.frequency.value = this.value;
